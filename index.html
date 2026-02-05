@@ -3,141 +3,424 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAN MEDICAL & INDUSTRIAL SUPPLIES - APIs and Ingredients</title>
+    <title>PAN MEDICAL & INDUSTRIAL SUPPLIES</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        /* Custom Styles for a clean, professional look */
         :root {
-            --primary-color: #004d99; /* Deep Professional Blue */
-            --secondary-color: #f8f9fa; /* Light Grey for background separation */
+            --primary-color: #004d99;
+            --sidebar-bg: #1a1d20;
+            --accent-color: #ffc107;
+            --light-bg: #f8f9fa;
         }
-        .hero-section {
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light-bg);
+        }
+
+        /* Sidebar Styling */
+        #sidebar-wrapper {
+            min-height: 100vh;
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            position: fixed;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+            padding: 2rem 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-bottom: 1px solid #2d3238;
+            letter-spacing: 1px;
+        }
+
+        #sidebar-wrapper .list-group-item {
+            background-color: transparent;
+            color: #adb5bd;
+            border: none;
+            padding: 1.2rem 1.5rem;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        #sidebar-wrapper .list-group-item:hover, 
+        #sidebar-wrapper .list-group-item.active {
             background-color: var(--primary-color);
             color: white;
-            padding: 100px 0;
         }
-        .section-padding {
+
+        /* Main Content */
+        #page-content-wrapper {
+            margin-left: 280px;
+            width: calc(100% - 280px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 77, 153, 0.85), rgba(0, 77, 153, 0.85)), 
+                        url('https://images.unsplash.com/photo-1587854692152-cbe660dbbb88?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            color: white;
             padding: 80px 0;
         }
-        .product-list-table {
-            border-collapse: separate;
-            border-spacing: 0 10px; /* Space between rows */
+
+        .category-card {
+            border: none;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            height: 100%;
+            cursor: pointer;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        .product-list-table th, .product-list-table td {
-            vertical-align: middle;
-            padding: 15px;
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--primary-color);
         }
-        .product-list-table tbody tr:nth-child(odd) {
-            background-color: var(--secondary-color);
+
+        .product-section {
+            display: none;
+            padding: 60px 0;
+            flex-grow: 1;
         }
-        .contact-info a {
-            color: var(--primary-color);
-            text-decoration: none;
+
+        .active-section {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer-contact {
+            background-color: #111;
+            color: #ddd;
+            padding: 60px 0;
+            margin-top: auto;
+        }
+
+        .contact-box {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        @media (max-width: 992px) {
+            #sidebar-wrapper { margin-left: -280px; }
+            #page-content-wrapper { margin-left: 0; width: 100%; }
+            #sidebar-wrapper.toggled { margin-left: 0; }
         }
     </style>
 </head>
 <body>
 
-    <header class="hero-section text-center">
-        <div class="container">
-            <h1 class="display-3 fw-bold">PAN MEDICAL & INDUSTRIAL SUPPLIES</h1>
-            <p class="lead mt-4">YOUR TRUSTED PARTNER FOR APIs, INTERMEDIATES, VITAMINS, AMINO ACIDS, AND MINERALS.</p>
-            <p class="mt-4">Together, we reduce complexity, ease the supply chain, and increase product quality and compliance with the right APIs, backed by trusted active pharmaceutical ingredient manufacturers.</p>
-        </div>
-    </header>
-
-    <section id="commitment" class="section-padding bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="display-5 mb-4">Quality & Compliance</h2>
-                    <p class="lead text-muted">Our high-quality API portfolio undergoes the <strong>highest quality assurance protocols</strong> and meets <strong>stringent pharmaceutical regulations</strong> to keep you at the forefront of changing regulatory requirements. We also offer ready access to comprehensive dossiers and tailored support that adapts to your specific needs.</p>
-                </div>
+    <div class="d-flex" id="wrapper">
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-uppercase">
+                <span class="text-warning">PAN</span> MEDICAL
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="javascript:void(0)" class="list-group-item active" onclick="showSection('home', this)">
+                    <i class="bi bi-grid-fill me-2"></i> Overview
+                </a>
+                <a href="javascript:void(0)" class="list-group-item" onclick="showSection('api', this)">
+                    <i class="bi bi-capsule me-2"></i> API Solutions
+                </a>
+                <a href="javascript:void(0)" class="list-group-item" onclick="showSection('formulations', this)">
+                    <i class="bi bi-bandaid me-2"></i> Speciality Formulations
+                </a>
+                <a href="javascript:void(0)" class="list-group-item" onclick="showSection('contrast', this)">
+                    <i class="bi bi-camera-video me-2"></i> Contrast Media
+                </a>
+                <a href="javascript:void(0)" class="list-group-item" onclick="showSection('chemicals', this)">
+                    <i class="bi bi-flask me-2"></i> Industrial Chemicals
+                </a>
+                <a href="javascript:void(0)" class="list-group-item" onclick="showSection('animal', this)">
+                    <i class="bi bi-pachyderm me-2"></i> Animal Feed & Vet
+                </a>
             </div>
         </div>
-    </section>
 
-    <section id="products" class="section-padding">
-        <div class="container">
-            <h2 class="display-5 text-center mb-5">Active Pharmaceutical Ingredients (APIs) Portfolio</h2>
-            <p class="text-center mb-4 text-muted small">Below is our commercial and lab-scale portfolio. <strong>Note:</strong> These products are not offered in countries where a valid patent exists.</p>
+        <div id="page-content-wrapper">
             
-            <div class="table-responsive">
-                <table class="table table-hover table-sm product-list-table">
-                    <thead class="bg-dark text-white">
-                        <tr>
-                            <th scope="col">Generic Name</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Regulatory Documents</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Clopidogrel Bisulphate (Form-2)</td><td>Commercial</td><td>IP/USP/EP</td></tr>
-                        <tr><td>Etodolac</td><td>Commercial</td><td>IP/USP/EP</td></tr>
-                        <tr><td>Sparfloxacin</td><td>Commercial</td><td>In-house</td></tr>
-                        <tr><td>Dabigatran Etexilate Mesylate</td><td>Commercial</td><td>In-house</td></tr>
-                        <tr><td>Rivaroxaban</td><td>Lab Scale</td><td>In-house</td></tr>
-                        <tr><td>Dabegron</td><td>Commercial</td><td>In-house</td></tr>
-                        <tr><td>Carvedilol</td><td>Commercial</td><td>CEP, USDMF, JDMF, CADIFA, KDMF</td></tr>
-                        <tr><td>Citalopram HBR</td><td>Commercial</td><td>CEP, USDMF, CADIFA</td></tr>
-                        <tr><td>Duloxetine HCL</td><td>Commercial</td><td>CEP, USDMF, CADIFA, KDMF, JDMF*</td></tr>
-                        <tr><td>Escitalopram Oxalate</td><td>Commercial</td><td>CEP, USDMF, CADIFA, JDMF*</td></tr>
-                        <tr><td>Ondansetron</td><td>Commercial</td><td>USDMF</td></tr>
-                        <tr><td>Ondansetron HCL</td><td>Commercial</td><td>CEP, CADIFA, USDMF*</td></tr>
-                        <tr><td>Rivastigmine</td><td>Commercial</td><td>CEP, KDMF, USDMF*</td></tr>
-                        <tr><td>Rivastigmine H Tartrate</td><td>Commercial</td><td>CEP, JDMF, USDMF*</td></tr>
-                        <tr><td>Rotigotine</td><td>Commercial</td><td>CEP, USDMF*, CADIFA</td></tr>
-                        <tr><td>Etofenamate</td><td>Commercial</td><td>CEP*</td></tr>
-                        <tr><td>Tamsulosin HCL</td><td>Commercial</td><td>CEP*</td></tr>
-                        <tr><td>Oxymetazoline HCL</td><td>Commercial</td><td>CEP*, USDMF*</td></tr>
-                        <tr><td>Tolterodine Tartrate</td><td>Commercial</td><td>CEP*</td></tr>
-                        <tr><td>Carvedilol Phosphate</td><td>Commercial</td><td>USDMF*</td></tr>
-                        <tr><td>Ziprasidone HCL</td><td>Commercial</td><td>USDMF*</td></tr>
-                        <tr><td>Topiramate</td><td>Commercial</td><td>CEP*</td></tr>
-                        <tr><td>Mizolastine</td><td>Commercial</td><td>-</td></tr>
-                        <tr><td>Pitolisant</td><td>Commercial</td><td>USDMF*</td></tr>
-                        <tr><td>Guaiacol</td><td>Commercial</td><td>-</td></tr>
-                        <tr><td>Sodium Phenyl Butyrate</td><td>Commercial</td><td>-</td></tr>
-                        <tr><td>Salsalate</td><td>Commercial</td><td>-</td></tr>
-                        <tr><td>Desvenlafaxine Succinate</td><td>Commercial</td><td>-</td></tr>
-                        <tr><td>Desvenlafaxine Benzoate</td><td>Commercial</td><td>KDMF</td></tr>
-                        <tr><td>Raloxifene Hydrochloride</td><td>Commercial</td><td>-</td></tr>
-                        <tr><td>Venlafaxine Hydrochloride</td><td>Commercial</td><td>CEP*</td></tr>
-                        <tr><td>Ziprasidone Meselate</td><td>Commercial</td><td>USDMF*</td></tr>
-                        <tr><td>Varenicline Tartrate</td><td>Commercial</td><td>-</td></tr>
-                        <tr><td>Choline Fenofibrate</td><td>Commercial</td><td>-</td></tr>
-                        <tr><td>Citalopram HCL</td><td>Commercial</td><td>-</td></tr>
-                        <tr><td>Sitagliptin</td><td>Commercial</td><td>-</td></tr>
-                    </tbody>
-                </table>
-                <p class="small text-end fst-italic mt-3">* denotes regulatory documents that are currently in process.</p>
+            <div id="home" class="product-section active-section">
+                <header class="hero-section text-center">
+                    <div class="container">
+                        <h1 class="display-3 fw-bold">PAN MEDICAL & INDUSTRIAL SUPPLIES</h1>
+                        <p class="lead mt-3">Reducing complexity and increasing product quality across the global supply chain.</p>
+                    </div>
+                </header>
+
+                <div class="container mt-5 mb-5">
+                    <h2 class="text-center mb-5 fw-bold">Our Supply Expertise</h2>
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card category-card p-4 text-center" onclick="showSection('api')">
+                                <i class="bi bi-capsule display-4 text-primary mb-3"></i>
+                                <h4 class="fw-bold">API Solutions</h4>
+                                <p class="text-muted small">High-quality Active Pharmaceutical Ingredients approved by US FDA & WHO GMP.</p>
+                                <span class="text-primary fw-bold">View Portfolio →</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card category-card p-4 text-center" onclick="showSection('formulations')">
+                                <i class="bi bi-bandaid display-4 text-primary mb-3"></i>
+                                <h4 class="fw-bold">Speciality Formulations</h4>
+                                <p class="text-muted small">Specialized therapy areas including Oncology, Cardiology, and Neurology.</p>
+                                <span class="text-primary fw-bold">View Details →</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card category-card p-4 text-center" onclick="showSection('contrast')">
+                                <i class="bi bi-camera-video display-4 text-primary mb-3"></i>
+                                <h4 class="fw-bold">Contrast Media</h4>
+                                <p class="text-muted small">Essential injection agents for high-precision CT and MRI diagnostics.</p>
+                                <span class="text-primary fw-bold">View Products →</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card category-card p-4 text-center" onclick="showSection('chemicals')">
+                                <i class="bi bi-flask display-4 text-primary mb-3"></i>
+                                <h4 class="fw-bold">Industrial Chemicals</h4>
+                                <p class="text-muted small">Speciality chemicals for Automotive, Textile, and Food industries.</p>
+                                <span class="text-primary fw-bold">View Chemicals →</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card category-card p-4 text-center" onclick="showSection('animal')">
+                                <i class="bi bi-pachyderm display-4 text-primary mb-3"></i>
+                                <h4 class="fw-bold">Animal Feed & Vet</h4>
+                                <p class="text-muted small">Comprehensive supplements and medicines for Fish, Poultry, and Dairy.</p>
+                                <span class="text-primary fw-bold">View Supplies →</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <div id="api" class="product-section">
+                <div class="container">
+                    <h2 class="fw-bold mb-4"><i class="bi bi-capsule me-2 text-primary"></i>API Portfolio</h2>
+                    <div class="table-responsive shadow-sm bg-white p-3 rounded">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Generic Name</th>
+                                    <th>Status</th>
+                                    <th>Regulatory Documents</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Clopidogrel Bisulphate (Form-2)</td><td>Commercial</td><td>IP/USP/EP</td></tr>
+                                <tr><td>Etodolac</td><td>Commercial</td><td>IP/USP/EP</td></tr>
+                                <tr><td>Sparfloxacin</td><td>Commercial</td><td>In-house</td></tr>
+                                <tr><td>Dabigatran Etexilate Mesylate</td><td>Commercial</td><td>In-house</td></tr>
+                                <tr><td>Rivaroxaban</td><td>Lab Scale</td><td>In-house</td></tr>
+                                <tr><td>Dabegron</td><td>Commercial</td><td>In-house</td></tr>
+                                <tr><td>Carvedilol</td><td>Commercial</td><td>CEP, USDMF, JDMF, CADIFA, KDMF</td></tr>
+                                <tr><td>Citalopram HBR</td><td>Commercial</td><td>CEP, USDMF, CADIFA</td></tr>
+                                <tr><td>Duloxetine HCL</td><td>Commercial</td><td>CEP, USDMF, CADIFA, KDMF, JDMF*</td></tr>
+                                <tr><td>Escitalopram Oxalate</td><td>Commercial</td><td>CEP, USDMF, CADIFA, JDMF*</td></tr>
+                                <tr><td>Ondansetron</td><td>Commercial</td><td>USDMF</td></tr>
+                                <tr><td>Ondansetron HCL</td><td>Commercial</td><td>CEP, CADIFA, USDMF*</td></tr>
+                                <tr><td>Rivastigmine</td><td>Commercial</td><td>CEP, KDMF, USDMF*</td></tr>
+                                <tr><td>Rivastigmine H Tartrate</td><td>Commercial</td><td>CEP, JDMF, USDMF*</td></tr>
+                                <tr><td>Rotigotine</td><td>Commercial</td><td>CEP, USDMF*, CADIFA</td></tr>
+                                <tr><td>Etofenamate</td><td>Commercial</td><td>CEP*</td></tr>
+                                <tr><td>Tamsulosin HCL</td><td>Commercial</td><td>CEP*</td></tr>
+                                <tr><td>Oxymetazoline HCL</td><td>Commercial</td><td>CEP*, USDMF*</td></tr>
+                                <tr><td>Tolterodine Tartrate</td><td>Commercial</td><td>CEP*</td></tr>
+                                <tr><td>Carvedilol Phosphate</td><td>Commercial</td><td>USDMF*</td></tr>
+                                <tr><td>Ziprasidone HCL</td><td>Commercial</td><td>USDMF*</td></tr>
+                                <tr><td>Topiramate</td><td>Commercial</td><td>CEP*</td></tr>
+                                <tr><td>Mizolastine</td><td>Commercial</td><td>-</td></tr>
+                                <tr><td>Pitolisant</td><td>Commercial</td><td>USDMF*</td></tr>
+                                <tr><td>Guaiacol</td><td>Commercial</td><td>-</td></tr>
+                                <tr><td>Sodium Phenyl Butyrate</td><td>Commercial</td><td>-</td></tr>
+                                <tr><td>Salsalate</td><td>Commercial</td><td>-</td></tr>
+                                <tr><td>Desvenlafaxine Succinate</td><td>Commercial</td><td>-</td></tr>
+                                <tr><td>Desvenlafaxine Benzoate</td><td>Commercial</td><td>KDMF</td></tr>
+                                <tr><td>Raloxifene Hydrochloride</td><td>Commercial</td><td>-</td></tr>
+                                <tr><td>Venlafaxine Hydrochloride</td><td>Commercial</td><td>CEP*</td></tr>
+                                <tr><td>Ziprasidone Meselate</td><td>Commercial</td><td>USDMF*</td></tr>
+                                <tr><td>Varenicline Tartrate</td><td>Commercial</td><td>-</td></tr>
+                                <tr><td>Choline Fenofibrate</td><td>Commercial</td><td>-</td></tr>
+                                <tr><td>Citalopram HCL</td><td>Commercial</td><td>-</td></tr>
+                                <tr><td>Sitagliptin</td><td>Commercial</td><td>-</td></tr>
+                            </tbody>
+                        </table>
+                        <p class="small text-muted mt-2 fst-italic">* denotes regulatory documents currently in process.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="formulations" class="product-section">
+                <div class="container">
+                    <h2 class="fw-bold mb-4">High Speciality Formulations</h2>
+                    <div class="row g-3">
+                        <div class="col-md-6 col-lg-3"><div class="p-4 bg-white shadow-sm border-top border-primary border-4 rounded"><h5>Oncology</h5></div></div>
+                        <div class="col-md-6 col-lg-3"><div class="p-4 bg-white shadow-sm border-top border-primary border-4 rounded"><h5>Cardiology</h5></div></div>
+                        <div class="col-md-6 col-lg-3"><div class="p-4 bg-white shadow-sm border-top border-primary border-4 rounded"><h5>Neurology</h5></div></div>
+                        <div class="col-md-6 col-lg-3"><div class="p-4 bg-white shadow-sm border-top border-primary border-4 rounded"><h5>Dermatology</h5></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contrast" class="product-section">
+                <div class="container">
+                    <h2 class="fw-bold mb-4">Contrast Media Injection</h2>
+                    <div class="list-group shadow-sm">
+                        <div class="list-group-item p-4">
+                            <h5 class="mb-1 fw-bold text-primary">Iohexol Liquid Injection</h5>
+                            <p class="mb-0">Contrast Media optimized for CT Scans.</p>
+                        </div>
+                        <div class="list-group-item p-4">
+                            <h5 class="mb-1 fw-bold text-primary">Meglumine Gadoterate</h5>
+                            <p class="mb-0">Specialized MRI Media.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chemicals" class="product-section">
+                <div class="container">
+                    <h2 class="fw-bold mb-4">Speciality Industrial Chemicals</h2>
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <p class="mb-4 text-muted">Serving Automotive, Textile, and Food & Sugar industries.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><i class="bi bi-check2-circle text-primary me-2"></i> Anti-corrosion chemicals</li>
+                                    <li class="list-group-item"><i class="bi bi-check2-circle text-primary me-2"></i> Boiler & Cooling Water chemicals</li>
+                                    <li class="list-group-item"><i class="bi bi-check2-circle text-primary me-2"></i> Aromatic chemicals</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><i class="bi bi-check2-circle text-primary me-2"></i> Textile & Agrochemicals</li>
+                                    <li class="list-group-item"><i class="bi bi-check2-circle text-primary me-2"></i> Fine & Organic chemicals</li>
+                                    <li class="list-group-item"><i class="bi bi-check2-circle text-primary me-2"></i> Sugar & Food Industry Chemicals</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="animal" class="product-section">
+                <div class="container">
+                    <h2 class="fw-bold mb-4">Animal Feed Supplements & Veterinary</h2>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="p-4 bg-white rounded shadow-sm h-100">
+                                <h5 class="fw-bold border-bottom pb-2">Fish (Aquaculture)</h5>
+                                <ul class="list-unstyled mt-3 small">
+                                    <li>• Dicalcium phosphate</li>
+                                    <li>• EDTA aqua / Feed supplements</li>
+                                    <li>• Binder gel & Probiotics</li>
+                                    <li>• Dissolved oxygen tablets</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-4 bg-white rounded shadow-sm h-100">
+                                <h5 class="fw-bold border-bottom pb-2">Poultry</h5>
+                                <ul class="list-unstyled mt-3 small">
+                                    <li>• Calcium granules (Toxic gas elimination)</li>
+                                    <li>• Mineral & Vitamin Mixtures</li>
+                                    <li>• Anti-Biotic granules</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-4 bg-white rounded shadow-sm h-100">
+                                <h5 class="fw-bold border-bottom pb-2">Dairy & Veterinary</h5>
+                                <ul class="list-unstyled mt-3 small">
+                                    <li>• Milk booster & Selenium supplements</li>
+                                    <li>• Cattle feed supplements / Amino acids</li>
+                                    <li>• Fenbendazole & Ivermectin tablets</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer id="contact" class="footer-contact">
+                <div class="container">
+                    <div class="text-center mb-5">
+                        <h2 class="fw-bold text-white">Enquiries & Partnership</h2>
+                        <p class="text-muted">For any commercial or partnership enquiries, please contact us directly:</p>
+                    </div>
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-md-5">
+                            <div class="contact-box">
+                                <h5 class="text-warning fw-bold mb-1">Syed Qureshi</h5>
+                                <p class="small text-uppercase mb-3">Business Manager</p>
+                                <p class="mb-1"><i class="bi bi-telephone-fill me-2 text-warning"></i> 0091 9000711504</p>
+                                <p class="mb-0"><i class="bi bi-envelope-fill me-2 text-warning"></i> syedqureshi8@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="contact-box">
+                                <h5 class="text-warning fw-bold mb-1">Yaseen Ali</h5>
+                                <p class="small text-uppercase mb-3">Business Manager</p>
+                                <p class="mb-1"><i class="bi bi-telephone-fill me-2 text-warning"></i> 0091 83413 74246</p>
+                                <p class="mb-0"><i class="bi bi-envelope-fill me-2 text-warning"></i> a.yaseen1919@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-5 pt-4 border-top border-secondary">
+                        <p class="small mb-0 text-muted">&copy; 2026 PAN MEDICAL & INDUSTRIAL SUPPLIES. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </footer>
+
         </div>
-    </section>
+    </div>
 
-    <footer id="contact" class="bg-dark text-white section-padding mt-5">
-        <div class="container contact-info">
-            <h2 class="display-6 text-center mb-4">Enquiries & Partnership</h2>
-            <p class="text-center lead">For any commercial or partnership enquiries, please contact us directly:</p>
+    <script>
+        function showSection(sectionId, element) {
+            // Hide all product sections
+            const sections = document.querySelectorAll('.product-section');
+            sections.forEach(sec => sec.classList.remove('active-section'));
+            
+            // Show the clicked section
+            const target = document.getElementById(sectionId);
+            if (target) target.classList.add('active-section');
 
-            <div class="row text-center mt-5">
-                <div class="col-md-6 mb-4">
-                    <h5 class="text-warning">Syed Qureshi</h5>
-                    <p class="mb-1">Business Manager</p>
-                    <p>Phone: <a href="tel:+919000711504" class="text-white">0091 9000711504</a></p>
-                    <p>Email: <a href="mailto:syedqureshi8@gmail.com" class="text-white">syedqureshi8@gmail.com</a></p>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <h5 class="text-warning">Yaseen Ali</h5>
-                    <p class="mb-1">Business Manager</p>
-                    <p>Phone: <a href="tel:+918341374246" class="text-white">0091 83413 74246</a></p>
-                    <p>Email: <a href="mailto:a.yaseen1919@gmail.com" class="text-white">a.yaseen1919@gmail.com</a></p>
-                </div>
-            </div>
+            // Update sidebar active state if a link was clicked
+            if (element) {
+                const links = document.querySelectorAll('.list-group-item');
+                links.forEach(l => l.classList.remove('active'));
+                element.classList.add('active');
+            } else {
+                // If clicked from a home block, update the sidebar highlight manually
+                const sidebarLinks = document.querySelectorAll('#sidebar-wrapper .list-group-item');
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('onclick').includes(sectionId)) {
+                        link.classList.add('active');
+                    }
+                });
+            }
 
-            </div>
-    </footer>
-
+            // Scroll to top of the content
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
