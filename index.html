@@ -117,6 +117,83 @@
             border-left: 3px solid var(--accent-color);
         }
 
+        /* About Us Preview */
+        .about-preview {
+            background: white;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .about-preview .learn-more-link {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .about-preview .learn-more-link:hover {
+            color: var(--accent-color);
+            gap: 10px;
+        }
+
+        /* About Full Page */
+        .about-full-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .about-full-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .about-full-card ul li {
+            padding: 6px 0;
+        }
+
+        .vision-banner {
+            background: linear-gradient(135deg, var(--primary-color), #0066cc);
+            color: white;
+            border-radius: 12px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,77,153,0.25);
+        }
+
+        .vision-banner h3 {
+            color: var(--accent-color);
+        }
+
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            margin-bottom: 30px;
+        }
+
+        .back-home-btn:hover {
+            background: #003a75;
+            color: white;
+            transform: translateX(-3px);
+        }
+
         @media (max-width: 992px) {
             #sidebar-wrapper { margin-left: -280px; }
             #page-content-wrapper { margin-left: 0; width: 100%; }
@@ -135,26 +212,33 @@
                 <a href="javascript:void(0)" class="list-group-item active" onclick="showSection('home', this)">
                     <i class="bi bi-grid-fill me-2"></i> Overview
                 </a>
+                <a href="javascript:void(0)" class="list-group-item" onclick="showSection('about', this)">
+                    <i class="bi bi-info-circle-fill me-2"></i> About Us
+                </a>
                 <a href="javascript:void(0)" class="list-group-item" onclick="showSection('api', this)">
-                    <i class="bi bi-capsule me-2"></i> API Solutions
+                    <i class="bi bi-capsule me-2"></i> Pharmaceuticals &amp; API's
                 </a>
                 <a href="javascript:void(0)" class="list-group-item" onclick="showSection('formulations', this)">
                     <i class="bi bi-bandaid me-2"></i> Speciality Formulations
                 </a>
                 <a href="javascript:void(0)" class="list-group-item" onclick="showSection('contrast', this)">
-                    <i class="bi bi-camera-video me-2"></i> Contrast Media
+                    <i class="bi bi-camera-video me-2"></i> Diagnostic &amp; Imaging Solutions
+                </a>
+                <a href="javascript:void(0)" class="list-group-item" onclick="showSection('devices', this)">
+                    <i class="bi bi-hospital me-2"></i> Medical Devices &amp; Consumables
                 </a>
                 <a href="javascript:void(0)" class="list-group-item" onclick="showSection('chemicals', this)">
-                    <i class="bi bi-flask me-2"></i> Industrial Chemicals
+                    <i class="bi bi-droplet-half me-2"></i> Industrial &amp; Specialty Chemicals
                 </a>
                 <a href="javascript:void(0)" class="list-group-item" onclick="showSection('animal', this)">
-                    <i class="bi bi-pachyderm me-2"></i> Animal Feed & Vet
+                    <i class="bi bi-heart-pulse me-2"></i> Veterinary &amp; Animal Health
                 </a>
             </div>
         </div>
 
         <div id="page-content-wrapper">
             
+            <!-- ==================== HOME ==================== -->
             <div id="home" class="product-section active-section">
                 <header class="hero-section text-center">
                     <div class="container">
@@ -169,7 +253,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="card category-card p-4 text-center" onclick="showSection('api')">
                                 <i class="bi bi-capsule display-4 text-primary mb-3"></i>
-                                <h4 class="fw-bold">API Solutions</h4>
+                                <h4 class="fw-bold">Pharmaceuticals &amp; API's</h4>
                                 <p class="text-muted small">High-quality Active Pharmaceutical Ingredients approved by US FDA & WHO GMP.</p>
                                 <span class="text-primary fw-bold">View Portfolio →</span>
                             </div>
@@ -185,34 +269,190 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="card category-card p-4 text-center" onclick="showSection('contrast')">
                                 <i class="bi bi-camera-video display-4 text-primary mb-3"></i>
-                                <h4 class="fw-bold">Contrast Media</h4>
-                                <p class="text-muted small">Essential injection agents for high-precision CT and MRI diagnostics.</p>
+                                <h4 class="fw-bold">Diagnostic &amp; Imaging Solutions</h4>
+                                <p class="text-muted small">Essential injection agents for high-precision CT, MRI diagnostics, and nuclear medicine.</p>
                                 <span class="text-primary fw-bold">View Products →</span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
+                            <div class="card category-card p-4 text-center" onclick="showSection('devices')">
+                                <i class="bi bi-hospital display-4 text-primary mb-3"></i>
+                                <h4 class="fw-bold">Medical Devices &amp; Consumables</h4>
+                                <p class="text-muted small">Disposables, surgical items, and hospital essentials at competitive pricing.</p>
+                                <span class="text-primary fw-bold">View Supplies →</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
                             <div class="card category-card p-4 text-center" onclick="showSection('chemicals')">
-                                <i class="bi bi-flask display-4 text-primary mb-3"></i>
-                                <h4 class="fw-bold">Industrial Chemicals</h4>
-                                <p class="text-muted small">Speciality chemicals for Automotive, Textile, and Food industries.</p>
+                                <i class="bi bi-droplet-half display-4 text-primary mb-3"></i>
+                                <h4 class="fw-bold">Industrial &amp; Specialty Chemicals</h4>
+                                <p class="text-muted small">Specialty chemicals for Automotive, Textile, and Food industries.</p>
                                 <span class="text-primary fw-bold">View Chemicals →</span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="card category-card p-4 text-center" onclick="showSection('animal')">
-                                <i class="bi bi-pachyderm display-4 text-primary mb-3"></i>
-                                <h4 class="fw-bold">Animal Feed & Vet</h4>
+                                <i class="bi bi-heart-pulse display-4 text-primary mb-3"></i>
+                                <h4 class="fw-bold">Veterinary &amp; Animal Health</h4>
                                 <p class="text-muted small">Comprehensive supplements and medicines for Fish, Poultry, and Dairy.</p>
                                 <span class="text-primary fw-bold">View Supplies →</span>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- About Us Preview Section (moved below Our Supply Expertise) -->
+                <div class="container mb-5">
+                    <div class="about-preview p-4 p-md-5">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <h3 class="fw-bold mb-3"><i class="bi bi-building me-2 text-primary"></i>About Us</h3>
+                                <p class="text-muted mb-3">
+                                    PAN Medical & Industrial Supplies is a professionally managed international sourcing and supply partner, connecting reliable Indian manufacturers with distributors, hospitals, institutions, and industrial buyers across the world. Our leadership team brings together over three decades of combined industry experience across pharmaceuticals, medical devices, diagnostics, specialty chemicals, and veterinary products.
+                                </p>
+                                <p class="text-muted mb-4">
+                                    We don't just trade products—we build trusted supply corridors between India and the rest of the world.
+                                </p>
+                                <a href="javascript:void(0)" class="learn-more-link" onclick="showSection('about')">
+                                    Learn More About Us <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 text-center d-none d-lg-block">
+                                <i class="bi bi-globe-americas" style="font-size: 8rem; color: #004d9920;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <!-- ==================== ABOUT US FULL PAGE ==================== -->
+            <div id="about" class="product-section">
+                <div class="container">
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="showSection('home')">
+                        <i class="bi bi-arrow-left"></i> Back to Home
+                    </a>
+
+                    <!-- About Us -->
+                    <div class="about-full-card">
+                        <h3 class="fw-bold"><i class="bi bi-building me-2"></i>About Us</h3>
+                        <p class="fs-5 text-muted">
+                            PAN Medical & Industrial Supplies is a professionally managed international sourcing and supply partner, connecting reliable Indian manufacturers with distributors, hospitals, institutions, and industrial buyers across the world.
+                        </p>
+                        <p class="text-muted">
+                            Our leadership team brings together over three decades of combined industry experience across pharmaceuticals, medical devices, diagnostics, specialty chemicals, and veterinary products. We understand both sides of the market—Indian manufacturing strengths and global regulatory, commercial, and distribution realities—allowing us to bridge the critical gaps in sourcing and supply.
+                        </p>
+                    </div>
+
+                    <!-- Our Vision -->
+                    <div class="vision-banner mb-4">
+                        <h3 class="fw-bold mb-3"><i class="bi bi-eye-fill me-2"></i>Our Vision</h3>
+                        <p class="fs-5 mb-0" style="max-width: 800px; margin: 0 auto;">
+                            To become a trusted India–Global trade bridge for pharmaceuticals, medical devices, diagnostics, chemicals, and veterinary products—delivering quality, compliance, continuity, and commercial value to our partners.
+                        </p>
+                    </div>
+
+                    <!-- Our Purpose -->
+                    <div class="about-full-card">
+                        <h3 class="fw-bold"><i class="bi bi-bullseye me-2"></i>Our Purpose</h3>
+                        <p class="text-muted mb-3">To fill the core gaps in cross-border sourcing and supply by ensuring:</p>
+                        <ul class="list-unstyled">
+                            <li class="d-flex align-items-start mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-3 mt-1"></i>
+                                <span>The right products for the right market.</span>
+                            </li>
+                            <li class="d-flex align-items-start mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-3 mt-1"></i>
+                                <span>Regulatory-ready, compliant materials.</span>
+                            </li>
+                            <li class="d-flex align-items-start mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-3 mt-1"></i>
+                                <span>Secure, risk-free supply chains.</span>
+                            </li>
+                            <li class="d-flex align-items-start mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-3 mt-1"></i>
+                                <span>Access to latest technologies and updated product portfolios.</span>
+                            </li>
+                            <li class="d-flex align-items-start mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-3 mt-1"></i>
+                                <span>Commercially viable and long-term sustainable partnerships.</span>
+                            </li>
+                        </ul>
+                        <div class="mt-4 p-3 bg-light rounded border-start border-4 border-warning">
+                            <p class="mb-0 fw-semibold fst-italic text-dark">
+                                <i class="bi bi-quote me-1 text-warning"></i>
+                                We don't just trade products—we build trusted supply corridors between India and the rest of the world.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Why Partner With Us -->
+                    <div class="about-full-card">
+                        <h3 class="fw-bold"><i class="bi bi-handshake me-2"></i>Why Partner With Us?</h3>
+                        <div class="row g-4 mt-2">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width:40px;height:40px;">
+                                        <i class="bi bi-trophy-fill"></i>
+                                    </div>
+                                    <div>
+                                        <strong>30+ years</strong> of combined professional experience.
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width:40px;height:40px;">
+                                        <i class="bi bi-search"></i>
+                                    </div>
+                                    <div>
+                                        Strong network of <strong>audited Indian manufacturers</strong>.
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width:40px;height:40px;">
+                                        <i class="bi bi-globe2"></i>
+                                    </div>
+                                    <div>
+                                        Deep understanding of <strong>global market dynamics & regulations</strong>.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width:40px;height:40px;">
+                                        <i class="bi bi-shield-check"></i>
+                                    </div>
+                                    <div>
+                                        Focus on <strong>risk-free sourcing & supply continuity</strong>.
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width:40px;height:40px;">
+                                        <i class="bi bi-clipboard2-check"></i>
+                                    </div>
+                                    <div>
+                                        Support in <strong>product selection, pricing strategy, and regulatory readiness</strong>.
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width:40px;height:40px;">
+                                        <i class="bi bi-people-fill"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Long-term partnership mindset</strong>—not transactional trading.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== API ==================== -->
             <div id="api" class="product-section">
                 <div class="container">
-                    <h2 class="fw-bold mb-4"><i class="bi bi-capsule me-2 text-primary"></i>API Portfolio</h2>
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="showSection('home')">
+                        <i class="bi bi-arrow-left"></i> Back to Home
+                    </a>
+                    <h2 class="fw-bold mb-4"><i class="bi bi-capsule me-2 text-primary"></i>Pharmaceuticals &amp; API's Portfolio</h2>
                     <div class="table-responsive shadow-sm bg-white p-3 rounded">
                         <table class="table table-hover align-middle">
                             <thead class="table-dark">
@@ -266,8 +506,12 @@
                 </div>
             </div>
 
+            <!-- ==================== FORMULATIONS ==================== -->
             <div id="formulations" class="product-section">
                 <div class="container">
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="showSection('home')">
+                        <i class="bi bi-arrow-left"></i> Back to Home
+                    </a>
                     <h2 class="fw-bold mb-4">High Speciality Formulations</h2>
                     <div class="row g-3">
                         <div class="col-md-6 col-lg-3"><div class="p-4 bg-white shadow-sm border-top border-primary border-4 rounded"><h5>Oncology</h5></div></div>
@@ -278,9 +522,13 @@
                 </div>
             </div>
 
+            <!-- ==================== CONTRAST / DIAGNOSTIC & IMAGING ==================== -->
             <div id="contrast" class="product-section">
                 <div class="container">
-                    <h2 class="fw-bold mb-4">Contrast Media Injection</h2>
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="showSection('home')">
+                        <i class="bi bi-arrow-left"></i> Back to Home
+                    </a>
+                    <h2 class="fw-bold mb-4"><i class="bi bi-camera-video me-2 text-primary"></i>Diagnostic &amp; Imaging Solutions</h2>
                     <div class="list-group shadow-sm">
                         <div class="list-group-item p-4">
                             <h5 class="mb-1 fw-bold text-primary">Iohexol Liquid Injection</h5>
@@ -290,13 +538,63 @@
                             <h5 class="mb-1 fw-bold text-primary">Meglumine Gadoterate</h5>
                             <p class="mb-0">Specialized MRI Media.</p>
                         </div>
+                        <div class="list-group-item p-4">
+                            <h5 class="mb-1 fw-bold text-primary">Radiation Therapy &amp; Nuclear Medicine Supplies</h5>
+                            <p class="mb-0">Comprehensive supplies for radiation therapy and nuclear medicine procedures.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- ==================== MEDICAL DEVICES & CONSUMABLES ==================== -->
+            <div id="devices" class="product-section">
+                <div class="container">
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="showSection('home')">
+                        <i class="bi bi-arrow-left"></i> Back to Home
+                    </a>
+                    <h2 class="fw-bold mb-4"><i class="bi bi-hospital me-2 text-primary"></i>Medical Devices &amp; Consumables</h2>
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <p class="mb-4 text-muted">Reliable supply of medical devices, disposables, and hospital consumables for healthcare institutions worldwide.</p>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="p-4 bg-light rounded h-100">
+                                    <div class="text-center mb-3">
+                                        <i class="bi bi-box-seam display-4 text-primary"></i>
+                                    </div>
+                                    <h5 class="fw-bold text-center mb-3">Disposables &amp; Hospital Essentials</h5>
+                                    <p class="text-muted small text-center">Disposables, surgical items, and hospital essentials sourced from quality-certified manufacturers.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-4 bg-light rounded h-100">
+                                    <div class="text-center mb-3">
+                                        <i class="bi bi-currency-dollar display-4 text-primary"></i>
+                                    </div>
+                                    <h5 class="fw-bold text-center mb-3">Cost-Effective Alternatives</h5>
+                                    <p class="text-muted small text-center">Cost-effective alternatives to branded products without compromising on quality or compliance.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-4 bg-light rounded h-100">
+                                    <div class="text-center mb-3">
+                                        <i class="bi bi-clipboard2-data display-4 text-primary"></i>
+                                    </div>
+                                    <h5 class="fw-bold text-center mb-3">Tender &amp; Key Account Support</h5>
+                                    <p class="text-muted small text-center">Supply support for tenders and key accounts with reliable delivery and documentation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== CHEMICALS ==================== -->
             <div id="chemicals" class="product-section">
                 <div class="container">
-                    <h2 class="fw-bold mb-4">Speciality Industrial Chemicals</h2>
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="showSection('home')">
+                        <i class="bi bi-arrow-left"></i> Back to Home
+                    </a>
+                    <h2 class="fw-bold mb-4"><i class="bi bi-droplet-half me-2 text-primary"></i>Industrial &amp; Specialty Chemicals</h2>
                     <div class="bg-white p-4 rounded shadow-sm">
                         <p class="mb-4 text-muted">Serving Automotive, Textile, and Food & Sugar industries.</p>
                         <div class="row g-4">
@@ -319,9 +617,13 @@
                 </div>
             </div>
 
+            <!-- ==================== ANIMAL ==================== -->
             <div id="animal" class="product-section">
                 <div class="container">
-                    <h2 class="fw-bold mb-4">Animal Feed Supplements & Veterinary</h2>
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="showSection('home')">
+                        <i class="bi bi-arrow-left"></i> Back to Home
+                    </a>
+                    <h2 class="fw-bold mb-4"><i class="bi bi-heart-pulse me-2 text-primary"></i>Veterinary &amp; Animal Health</h2>
                     <div class="row g-4">
                         <div class="col-md-4">
                             <div class="p-4 bg-white rounded shadow-sm h-100">
@@ -358,6 +660,7 @@
                 </div>
             </div>
 
+            <!-- ==================== FOOTER ==================== -->
             <footer id="contact" class="footer-contact">
                 <div class="container">
                     <div class="text-center mb-5">
@@ -401,21 +704,14 @@
             const target = document.getElementById(sectionId);
             if (target) target.classList.add('active-section');
 
-            // Update sidebar active state if a link was clicked
-            if (element) {
-                const links = document.querySelectorAll('.list-group-item');
-                links.forEach(l => l.classList.remove('active'));
-                element.classList.add('active');
-            } else {
-                // If clicked from a home block, update the sidebar highlight manually
-                const sidebarLinks = document.querySelectorAll('#sidebar-wrapper .list-group-item');
-                sidebarLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if(link.getAttribute('onclick').includes(sectionId)) {
-                        link.classList.add('active');
-                    }
-                });
-            }
+            // Update sidebar active state
+            const sidebarLinks = document.querySelectorAll('#sidebar-wrapper .list-group-item');
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('onclick') && link.getAttribute('onclick').includes("'" + sectionId + "'")) {
+                    link.classList.add('active');
+                }
+            });
 
             // Scroll to top of the content
             window.scrollTo({ top: 0, behavior: 'smooth' });
